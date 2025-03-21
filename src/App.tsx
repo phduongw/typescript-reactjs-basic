@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Todos from "./components/Todos";
+import Todo from "./models/todo";
+import NewTodo from "./components/NewTodo";
+
+const DUMMY_TODO: Todo[] = [
+    new Todo('React'),
+    new Todo('Typescript'),
+    new Todo('NodeJS'),
+    new Todo('Python'),
+]
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [todos, setTodos] = useState<Todo[]>([])
+    return (
+        <div>
+            <NewTodo addTodo={(todo: Todo) => setTodos((prev) => [...prev, todo])}/>
+            <Todos items={todos}/>
+        </div>
+    );
 }
 
 export default App;
